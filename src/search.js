@@ -1,11 +1,14 @@
 import renderTable from "./renderTable.js";
+import { store } from "./store.js";
 
-export default function search(e, data, currentPage, itemsPerPage) {
-  const searchTerm = e.target.value;
-  const filteredData = data.filter((row) => {
-    return Object.values(row).some((value) => {
-      return value.toString().includes(searchTerm);
-    });
+export default function search(e) {
+  const searchQuery = e.target.value;
+  const filteredProducts = store.products.filter((product) => {
+    return (
+      product.title.includes(searchQuery) ||
+      product.description.includes(searchQuery)
+    );
   });
-  renderTable(filteredData, currentPage, itemsPerPage);
+
+  renderTable(filteredProducts);
 }

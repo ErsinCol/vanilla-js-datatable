@@ -1,36 +1,40 @@
 import formatDate from "./utils/formatDate.js";
+import { store } from "./store.js";
 
-export default function renderTable(data, currentPage, itemsPerPage) {
+export default function renderTable(products) {
   let result = "";
-  data
-    .filter((row, index) => {
-      let start = (currentPage - 1) * itemsPerPage;
-      let end = currentPage * itemsPerPage;
-      if (index >= start && index < end) return true;
-    })
-    .forEach((column) => {
-      result += `
+  let productsToRender;
+  if (products) {
+    productsToRender = store.getProductsByPage(store.currentPage, products);
+  } else {
+    productsToRender = store.getProductsByPage(
+      store.currentPage,
+      store.products
+    );
+  }
+
+  productsToRender.forEach((product) => {
+    result += `
         <tr>
-            <td class="expand-icon">&#x25B6;</td>
-            <td>${column.id}</td>
-            <td>${column.title}</td>
-            <td>${column.category}</td>
-            <td>${column.rating.rate}</td>
-            <td>${column.price} TL</td>
+            <td class="expand-icon"><i class="fa-solid fa-circle-chevron-right"></i></td>
+            <td>${product.id}</td>
+            <td>${product.title}</td>
+            <td>${product.category}</td>
+            <td>${product.rating.rate}</td>
+            <td>${product.price} TL</td>
             <td>${formatDate(new Date())}</td>
         </tr>
         <tr class="hidden">
             <td colspan="7">
                 <h4>Description</h4>
-                <p> ${column.description}</p>
+                <p> ${product.description}</p>
                 <h4>Image</h4>
-                <img src="${column.image}" alt="${
-        column.title
-      }" width="50" height="50">
-                <!-- Diğer detayları buraya ekleyebilirsiniz -->
+                <img src="${product.image}" alt="${
+      product.title
+    }" width="50" height="50">
             </td>
         </tr>`;
-    });
+  });
 
   const table = document.querySelector("table tbody");
   table.innerHTML = result;
@@ -44,9 +48,9 @@ export default function renderTable(data, currentPage, itemsPerPage) {
       detailsRow.classList.toggle("hidden");
 
       if (detailsRow.classList.contains("hidden")) {
-        this.innerHTML = "&#x25B6;";
+        this.innerHTML = "<i class='fa-solid fa-circle-chevron-right'></i>";
       } else {
-        this.innerHTML = "&#x25BC;";
+        this.innerHTML = "<i class='fa-solid fa-circle-chevron-down'></i>";
       }
     });
   });

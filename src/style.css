@@ -21,6 +21,19 @@ table {
   border-collapse: collapse;
 }
 
+caption {
+  caption-side: top;
+  text-align: left;
+  padding-bottom: 10px;
+  font-weight: bold;
+  font-size: 2rem;
+}
+
+select {
+  padding: 5px 10px;
+  border-radius: 4px;
+}
+
 p {
   margin: 0;
 }
@@ -31,7 +44,6 @@ h4 {
 
 th,
 td {
-  padding: 8px 12px;
   text-align: left;
   white-space: nowrap;
   overflow: hidden;
@@ -40,8 +52,13 @@ td {
   max-width: 130px;
 }
 
+th {
+  padding: 16px 4px;
+}
+
 td {
   border-bottom: 1px solid #ddd;
+  padding: 8px 4px;
 }
 
 thead {
@@ -86,7 +103,7 @@ tbody tr:nth-child(even) td {
 .pagination-container {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 #paginationButtons {
@@ -95,21 +112,23 @@ tbody tr:nth-child(even) td {
 }
 
 #paginationButtons button {
+  text-align: center;
+  font-size: 16px;
   margin-right: 4px;
   padding: 4px 8px;
-  background-color: #94a3b8;
-  color: white;
+  border-radius: 4px;
+  background-color: transparent;
+  color: gray;
   border: none;
   cursor: pointer;
-  border-radius: 4px;
 }
 
 #paginationButtons button:hover {
-  background-color: #64748b;
+  background-color: #e2e8f0;
 }
 
 #paginationButtons button.active {
-  background-color: #475569;
+  background-color: #cbd5e1;
 }
 
 #paginationButtons button[disabled] {
@@ -123,6 +142,7 @@ tbody tr:nth-child(even) td {
   margin-bottom: 12px;
   border: 1px solid #ddd;
   border-radius: 4px;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
 }
 
 #searchInput:hover {
@@ -138,6 +158,9 @@ tbody tr:nth-child(even) td {
 }
 
 .export-container button {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
   padding: 6px 12px;
   border-radius: 4px;
   background-color: #22c55e;
@@ -145,6 +168,10 @@ tbody tr:nth-child(even) td {
   border: 1px solid transparent;
   font-weight: bold;
   cursor: pointer;
+}
+
+.export-container button i {
+  font-size: 20px;
 }
 
 .export-container button:hover {

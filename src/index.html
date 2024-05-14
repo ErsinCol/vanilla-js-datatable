@@ -9,13 +9,21 @@
         display: none;
       }
     </style>
+    <script
+      src="https://kit.fontawesome.com/cfbf99e28a.js"
+      crossorigin="anonymous"
+    ></script>
     <title>Datatable</title>
   </head>
   <body>
     <div class="container hidden-content">
       <div class="export-container">
-        <button id="excelBtn">Export to Excel</button>
-        <button id="pdfBtn">Export to PDF</button>
+        <button id="excelBtn">
+          <i class="fa-regular fa-file-excel"></i> Export to Excel
+        </button>
+        <button id="pdfBtn">
+          <i class="fa-regular fa-file-pdf"></i> Export to PDF
+        </button>
       </div>
       <input
         type="search"
@@ -25,6 +33,9 @@
       />
       <div class="table-container">
         <table id="datatable">
+          <caption>
+            Products
+          </caption>
           <thead>
             <tr>
               <th></th>
@@ -46,19 +57,27 @@
         </table>
       </div>
       <div class="pagination-container">
+        <div id="paginationButtons">
+          <button id="firstButton">
+            <i class="fa-solid fa-angles-left"></i>
+          </button>
+          <button id="prevButton">
+            <i class="fa-solid fa-angle-left"></i>
+          </button>
+          <div id="pageNumbers"></div>
+          <button id="nextButton">
+            <i class="fa-solid fa-angle-right"></i>
+          </button>
+          <button id="lastButton">
+            <i class="fa-solid fa-angles-right"></i>
+          </button>
+        </div>
         <select id="itemsPerPage" name="itemsPerPage">
           <option value="5">5</option>
           <option value="10">10</option>
           <option value="15">15</option>
           <option value="20">20</option>
         </select>
-        <div id="paginationButtons">
-          <button id="firstButton">&#171;</button>
-          <button id="prevButton">&#8249;</button>
-          <div id="pageNumbers"></div>
-          <button id="nextButton">&#8250;</button>
-          <button id="lastButton">&#187;</button>
-        </div>
       </div>
     </div>
   </body>

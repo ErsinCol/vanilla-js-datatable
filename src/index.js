@@ -1,112 +1,62 @@
 import "./style.css";
+import { store } from "./store.js";
 import fetchData from "./utils/fetchData.js";
 import renderTable from "./renderTable.js";
 import search from "./search.js";
 import sort from "./sort.js";
-import { renderPagination, updateActivePage } from "./pagination.js";
+import {
+  handleFirst,
+  handleLast,
+  handleNext,
+  handlePrevious,
+  renderPagination,
+  updateActivePage,
+} from "./pagination.js";
 import exportPdf from "./utils/exportPdf.js";
 import exportExcel from "./utils/exportExcel.js";
 
 document.addEventListener("DOMContentLoaded", init, false);
 
-let prevButton, nextButton, firstButton, lastButton;
-let searchInput;
-let pageNumbers;
-let excelBtn, pdfBtn;
-let data;
-let currentPage = 1;
-let itemsPerPageSelect;
-let itemsPerPage = 5;
-
 async function init() {
   document.querySelector(".container").classList.remove("hidden-content");
 
-  data = await fetchData();
+  const response = await fetchData();
+  store.setProducts(response);
 
-  renderTable(data, currentPage, itemsPerPage);
+  renderTable();
 
-  excelBtn = document.getElementById("excelBtn");
-  pdfBtn = document.getElementById("pdfBtn");
-
+  const excelBtn = document.getElementById("excelBtn");
   excelBtn.addEventListener("click", exportExcel);
+  const pdfBtn = document.getElementById("pdfBtn");
   pdfBtn.addEventListener("click", exportPdf);
 
   document.querySelectorAll("table thead tr th").forEach((column) => {
-    column.addEventListener(
-      "click",
-      (event) => sort(event, data, currentPage, itemsPerPage),
-      false
-    );
+    column.addEventListener("click", sort);
   });
 
-  nextButton = document.querySelector("#nextButton");
-  nextButton.addEventListener(
-    "click",
-    () => {
-      if (currentPage * itemsPerPage < data.length) {
-        currentPage++;
-        renderTable(data, currentPage, itemsPerPage);
-        updateActivePage(currentPage);
-      }
-    },
-    false
-  );
+  const nextButton = document.querySelector("#nextButton");
+  nextButton.addEventListener("click", handleNext);
 
-  prevButton = document.querySelector("#prevButton");
-  prevButton.addEventListener(
-    "click",
-    () => {
-      if (currentPage > 1) {
-        currentPage--;
-        renderTable(data, currentPage, itemsPerPage);
-        updateActivePage(currentPage);
-      }
-    },
-    false
-  );
+  const prevButton = document.querySelector("#prevButton");
+  prevButton.addEventListener("click", handlePrevious);
 
-  firstButton = document.querySelector("#firstButton");
-  firstButton.addEventListener(
-    "click",
-    () => {
-      currentPage = 1;
-      renderTable(data, currentPage, itemsPerPage);
-      updateActivePage(currentPage);
-    },
-    false
-  );
+  const firstButton = document.querySelector("#firstButton");
+  firstButton.addEventListener("click", handleFirst);
 
-  lastButton = document.querySelector("#lastButton");
-  lastButton.addEventListener(
-    "click",
-    () => {
-      const totalPages = Math.ceil(data.length / itemsPerPage);
-      currentPage = totalPages;
-      renderTable(data, currentPage, itemsPerPage);
-      updateActivePage(currentPage);
-    },
-    false
-  );
+  const lastButton = document.querySelector("#lastButton");
+  lastButton.addEventListener("click", handleLast);
 
-  pageNumbers = document.querySelector("#pageNumbers");
+  renderPagination();
 
-  renderPagination(data, itemsPerPage, currentPage);
+  const searchInput = document.getElementById("searchInput");
+  searchInput.addEventListener("input", search);
 
-  searchInput = document.getElementById("searchInput");
-  searchInput.addEventListener(
-    "input",
-    (event) => {
-      search(event, data, currentPage, itemsPerPage);
-    },
-    false
-  );
-
-  itemsPerPageSelect = document.getElementById("itemsPerPage");
+  const itemsPerPageSelect = document.getElementById("itemsPerPage");
   itemsPerPageSelect.addEventListener("change", (event) => {
-    itemsPerPage = parseInt(event.target.value);
-    currentPage = 1;
-    renderTable(data, currentPage, itemsPerPage);
-    renderPagination(data, itemsPerPage, currentPage);
-    updateActivePage(currentPage);
+    store.setItemsPerPage(parseInt(event.target.value));
+    store.setCurrentPage(1);
+    renderTable();
+    renderPagination();
+    updateActivePage();
   });
 }
