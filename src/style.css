@@ -20,6 +20,14 @@ table {
   border-collapse: collapse;
 }
 
+p {
+  margin: 0;
+}
+
+h4 {
+  margin: 8px 0;
+}
+
 th,
 td {
   padding: 8px 12px;
@@ -31,13 +39,28 @@ td {
   max-width: 130px;
 }
 
+td {
+  border-bottom: 1px solid #ddd;
+}
+
 thead {
   background-color: #2c5e77;
   color: #fff;
 }
 
+.hidden {
+  display: none;
+}
+.expand-icon {
+  cursor: pointer;
+}
+
 tbody tr:nth-child(even) {
   background-color: #e4f0f5;
+}
+
+tbody tr:nth-child(even) td {
+  white-space: wrap;
 }
 
 .loading-spinner {
@@ -59,27 +82,32 @@ tbody tr:nth-child(even) {
   }
 }
 
-#pagination {
+.pagination-container {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
 }
 
-#pagination button {
+#paginationButtons {
+  display: flex;
+  align-items: center;
+}
+
+#paginationButtons button {
+  margin-right: 4px;
   padding: 4px 8px;
   background-color: #94a3b8;
   color: white;
   border: none;
   cursor: pointer;
   border-radius: 4px;
-  margin-right: 4px;
 }
 
-#pagination button.active {
+#paginationButtons button.active {
   background-color: #64748b;
 }
 
-#pagination button[disabled] {
+#paginationButtons button[disabled] {
   opacity: 0.5;
   cursor: not-allowed;
 }

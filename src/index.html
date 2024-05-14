@@ -27,6 +27,7 @@
         <table id="datatable">
           <thead>
             <tr>
+              <th></th>
               <th data-sort="id">Id</th>
               <th data-sort="title">Title</th>
               <th data-sort="category">Category</th>
@@ -37,19 +38,27 @@
           </thead>
           <tbody>
             <tr>
-              <td colspan="6">
+              <td colspan="7">
                 <div class="loading-spinner"></div>
               </td>
             </tr>
           </tbody>
         </table>
       </div>
-      <div id="pagination">
-        <button id="firstButton">&#171;</button>
-        <button id="prevButton">&#8249;</button>
-        <div id="pageNumbers"></div>
-        <button id="nextButton">&#8250;</button>
-        <button id="lastButton">&#187;</button>
+      <div class="pagination-container">
+        <select id="itemsPerPage" name="itemsPerPage">
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="15">15</option>
+          <option value="20">20</option>
+        </select>
+        <div id="paginationButtons">
+          <button id="firstButton">&#171;</button>
+          <button id="prevButton">&#8249;</button>
+          <div id="pageNumbers"></div>
+          <button id="nextButton">&#8250;</button>
+          <button id="lastButton">&#187;</button>
+        </div>
       </div>
     </div>
   </body>
