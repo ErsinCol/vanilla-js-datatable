@@ -4,12 +4,15 @@ import renderTable from "./renderTable.js";
 import search from "./search.js";
 import sort from "./sort.js";
 import { renderPagination, updateActivePage } from "./pagination.js";
+import exportPdf from "./utils/exportPdf.js";
+import exportExcel from "./utils/exportExcel.js";
 
 document.addEventListener("DOMContentLoaded", init, false);
 
 let prevButton, nextButton, firstButton, lastButton;
 let searchInput;
 let pageNumbers;
+let excelBtn, pdfBtn;
 let data;
 let currentPage = 1;
 const itemsPerPage = 6;
@@ -20,6 +23,12 @@ async function init() {
   data = await fetchData();
 
   renderTable(data);
+
+  excelBtn = document.getElementById("excelBtn");
+  pdfBtn = document.getElementById("pdfBtn");
+
+  excelBtn.addEventListener("click", exportExcel);
+  pdfBtn.addEventListener("click", exportPdf);
 
   document.querySelectorAll("table thead tr th").forEach((column) => {
     column.addEventListener("click", (event) => sort(event, data), false);
