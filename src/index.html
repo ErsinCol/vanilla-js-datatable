@@ -5,5 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Datatable</title>
   </head>
-  <body></body>
+  <body>
+    <div class="container">
+      <div class="export-container">
+        <button>Export to Excel</button>
+        <button>Export to PDF</button>
+      </div>
+      <input
+        type="search"
+        id="searchInput"
+        placeholder="Ara..."
+        autocomplete="off"
+      />
+      <div class="table-container">
+        <table id="datatable">
+          <thead>
+            <tr>
+              <th data-sort="id">Id</th>
+              <th data-sort="title">Title</th>
+              <th data-sort="category">Category</th>
+              <th data-sort="rate">Rate</th>
+              <th data-sort="price">Price</th>
+              <th data-sort="date">Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td colspan="6">Loading...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div id="pagination">
+        <button id="firstButton">&#171;</button>
+        <button id="prevButton">&#8249;</button>
+        <div id="pageNumbers"></div>
+        <button id="nextButton">&#8250;</button>
+        <button id="lastButton">&#187;</button>
+      </div>
+    </div>
+  </body>
 </html>
