@@ -3,10 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      /* resolve FOUC problem */
+      .hidden-content {
+        display: none;
+      }
+    </style>
     <title>Datatable</title>
   </head>
   <body>
-    <div class="container">
+    <div class="container hidden-content">
       <div class="export-container">
         <button>Export to Excel</button>
         <button>Export to PDF</button>
@@ -31,7 +37,9 @@
           </thead>
           <tbody>
             <tr>
-              <td colspan="6">Loading...</td>
+              <td colspan="6">
+                <div class="loading-spinner"></div>
+              </td>
             </tr>
           </tbody>
         </table>

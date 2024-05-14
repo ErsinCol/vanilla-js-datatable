@@ -15,6 +15,8 @@ let currentPage = 1;
 const itemsPerPage = 6;
 
 async function init() {
+  document.querySelector(".container").classList.remove("hidden-content");
+
   data = await fetchData();
 
   renderTable(data);
