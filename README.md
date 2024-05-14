@@ -2,7 +2,7 @@
 
 This project is a dynamic data table built using Vanilla JavaScript.
 
-The data for the table is fetched from the Fake Store API using Axios.
+The data for the table is fetched from the [Fake Store API](https://fakestoreapi.com/) using [axios](https://www.npmjs.com/package/axios).
 
 The table includes a search input field allowing case-sensitive filtering of data.
 
@@ -15,7 +15,7 @@ Additionally, the table can be exported to Excel and PDF formats using the follo
 - [xlsx](https://www.npmjs.com/package/xlsx)
 - [jspdf](https://www.npmjs.com/package/jspdf)
 
-The project is structured using Webpack.
+The project is structured using [Webpack](https://webpack.js.org/).
 
 ## Installation and Usage
 
