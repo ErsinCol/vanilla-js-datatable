@@ -10,7 +10,10 @@ The design is responsive, ensuring it looks good on all devices.
 
 Users can sort the table based on each column.
 
-Additionally, the table can be exported to Excel and PDF formats.
+Additionally, the table can be exported to Excel and PDF formats using the following packages:
+
+- [xlsx](https://www.npmjs.com/package/xlsx)
+- [jspdf](https://www.npmjs.com/package/jspdf)
 
 The project is structured using Webpack.
 
